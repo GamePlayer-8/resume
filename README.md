@@ -7,9 +7,11 @@
 </p>
 
 <p align="center">
+	<div>
 	<b>Select CV / resume language:</b>
 	<div class="main">
 		<a href="cv/cv.pdf" class="button">PL</a><b class="text-hidden"> | </b><a href="cv/cv_en.pdf" class="button">EN</a>
+	</div>
 	</div>
 </p>
 
