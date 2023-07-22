@@ -1,0 +1,54 @@
+name: Compile source.
+on:
+  push:
+    branches:
+      - master
+      - main
+
+jobs:
+  Master:
+    runs-on: ubuntu-latest
+
+    container: alpine
+
+    steps:
+        - name: ^ Checkout
+          uses: actions/checkout@v3
+
+        - name: Create build dir.
+          run: mkdir /source
+
+        - name: Copy data.
+          run: |
+              cp -r * /source/
+              cp -r .github /source/
+
+        - name: Set up environment.
+          run: |
+              apk add --no-cache jq curl
+              echo "GIT_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+              echo "GIT_PROJECT_NAME=${{ github.event.repository.name }}" >> $GITHUB_ENV
+              echo "GIT_USERNAME=${{ github.repository_owner }}" >> $GITHUB_ENV
+              echo "GIT_REPO=${{ github.repository }}" >> $GITHUB_ENV
+              echo "GIT_DOMAIN=$(curl -s "https://api.github.com/repos/${{ github.repository_owner }}/${{ github.event.repository.name }}" | jq -r '.homepage' | cut -d "/" -f 3)" >> $GITHUB_ENV
+              echo "GIT_WEBPAGE=https://$(curl -s "https://api.github.com/repos/${{ github.repository_owner }}/${{ github.event.repository.name }}" | jq -r '.homepage' | cut -d "/" -f 3)" >> $GITHUB_ENV
+
+        - name: Run Init.
+          run: cd /source && sh init.sh
+
+        - name: Deploy
+          run: |
+              cd /runner/page
+              apk add --no-cache git
+              git config --global credential.helper store
+              git config --global user.name $GIT_USERNAME
+              git config --global user.email gameplayer2019pl@tutamail.com
+              git init
+              git branch -m gh-pages
+              git add -A
+              git commit -m "Update Pages."
+              git remote add origin https://$GIT_USERNAME:$GIT_TOKEN@github.com/$GIT_USERNAME/$GIT_PROJECT_NAME
+              echo "Pushing to 'https://github.com/$GIT_USERNAME/$GIT_PROJECT_NAME'..."
+              echo "https://$GIT_USERNAME:$GIT_TOKEN@github.com" > ~/.git-credentials
+              git config --global http.postBuffer 524288000
+              git push -f -u origin gh-pages
