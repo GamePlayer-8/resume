@@ -200,16 +200,11 @@ a {
 	width: 90%;
 }
 
-.main {
-	margin: 0;
-}
-
 .main .button {
-	margin: 0;
 	border: 1px solid #5d00ff;
 	border-radius: 0px;
-	margin-left: -2px;
-	margin-right: -3px;
+	margin-left: -3px;
+	margin-right: -4px;
 	border-left: 0px;
 	border-right: 0px;
 	background-color: #10002e;
