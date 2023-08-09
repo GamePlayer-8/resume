@@ -38,17 +38,5 @@ jobs:
 
         - name: Deploy
           run: |
-              cd /runner/page
-              apk add --no-cache git
-              git config --global credential.helper store
-              git config --global user.name $GIT_USERNAME
-              git config --global user.email gameplayer2019pl@tutamail.com
-              git init
-              git branch -m gh-pages
-              git add -A
-              git commit -m "Update Pages."
-              git remote add origin https://$GIT_USERNAME:$GIT_TOKEN@github.com/$GIT_USERNAME/$GIT_PROJECT_NAME
-              echo "Pushing to 'https://github.com/$GIT_USERNAME/$GIT_PROJECT_NAME'..."
-              echo "https://$GIT_USERNAME:$GIT_TOKEN@github.com" > ~/.git-credentials
-              git config --global http.postBuffer 524288000
-              git push -f -u origin gh-pages
+              apk add --no-cache git bash
+              bash /source/scripts/gh-pages.sh
