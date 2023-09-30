@@ -1,5 +1,5 @@
 <p align="center">
-	<a href="https://chimmie.k.vu/resume">
+	<a href="https://resume.chimmie.k.vu">
 		<img src="docs/cv.png" width="200">
 		<h1 align="center" class="header">Resume / CV</h1>
 	</a>
@@ -16,5 +16,5 @@
 
 ### License
 
-***Akini License 3.1***
+***Akini License 4.0***
 

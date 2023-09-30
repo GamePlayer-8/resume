@@ -13,18 +13,18 @@ fi
 SCRIPT_PATH="$(dirname "$(realpath "$0")")"
 
 while IFS= read -r line; do
-    if [[ -n "$line" && ! "$line" =~ ^#.* ]]; then
-        param_name=$(echo "$line" | cut -d "=" -f 1)
-        param_value=$(echo "$line" | cut -d "=" -f 2)
+    if [ -n "$line" ] && ! echo "$line" | grep '^#.*' >/dev/null; then
+        param_name="$(echo "$line" | cut -d "=" -f 1)"
+        param_value="$(echo "$line" | cut -d "=" -f 2)"
 
-        cmd_value=$(echo "$param_value" | cut -d " " -f 1)
+        cmd_value="$(echo "$param_value" | cut -d " " -f 1)"
 
         case "$cmd_value" in
             "@datimize")
-                param_value="$(sh "$SCRIPT_PATH"/datimize.sh $(echo "$param_value" | cut -d " " -f 2))"
+                param_value="$(sh "$SCRIPT_PATH"/datimize.sh "$(echo "$param_value" | cut -d " " -f 2)")"
                 ;;
             "@env")
-                param_value="$(sh "$SCRIPT_PATH"/env.sh $(echo "$param_value" | cut -d " " -f 2))"
+                param_value="$(sh "$SCRIPT_PATH"/env.sh "$(echo "$param_value" | cut -d " " -f 2)")"
                 ;;
         esac
 
