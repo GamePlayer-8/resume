@@ -17,5 +17,8 @@ echo 'Executing setup...'
 sh scripts/set.sh res/parser.conf index.html
 sh scripts/set.sh res/parser.conf README.md
 
-rm -f .gitignore
+cp res/icon.ico favicon.ico
+cp res/icon.png favicon.png
+cp res/icon.webp favicon.webp
 
+rm -f .gitignore
