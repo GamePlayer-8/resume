@@ -8,7 +8,7 @@
 	<div>
 	<b class="text-hidden">Manual redirect:</b>
 	<div class="main">
-		<a href="cv/cv_en.pdf" class="button">PDF file document</a>
+		<a href="https://resume.chimmie.k.vu/cv/cv_en.pdf" class="button">PDF file document</a>
 	</div>
 	</div>
 </p>
